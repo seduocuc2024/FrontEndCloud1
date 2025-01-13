@@ -1,0 +1,78 @@
+<div class="dashboard-container">
+  <!-- Header - Mismo que página privada -->
+  <header class="header">
+    <div class="logo-section">
+      <h1>Sistema de Alertas Médicas</h1>
+    </div>
+    <div class="user-section">
+      <span class="user-name">Dr(a). {{obtenerUsuario()}}</span>
+      <button class="logout-button" (click)="cerrarSesion()">
+        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+      </button>
+    </div>
+  </header>
+
+  <!-- Contenido de Pacientes -->
+  <div class="main-content">
+    <div class="content-header">
+      <h2 class="section-title">Gestión de Pacientes</h2>
+      <button class="btn-primary" (click)="abrirDialogoNuevoPaciente()">
+        <i class="fas fa-plus"></i> Nuevo Paciente
+      </button>
+    </div>
+
+    <div class="table-container">
+      <table class="table-modern">
+        <thead>
+          <tr>
+            <th>Paciente</th>
+            <th>Estado</th>
+            <th>Presión</th>
+            <th>Ritmo</th>
+            <th>Temp.</th>
+            <th>O₂</th>
+            <th>Cambio</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let paciente of pacientes">
+            <td>
+              <div class="patient-info">
+                <span class="name">{{paciente.nombre + ' ' + paciente.apellido}}</span>
+              </div>
+            </td>
+            <td>
+              <span [class]="'status-badge ' + getEstadoClass(paciente.estado)">
+                {{paciente.estado}}
+              </span>
+            </td>
+            <td>{{paciente.signosVitales[0]?.presionArterial}} mmHg</td>
+            <td>{{paciente.signosVitales[0]?.frecuenciaCardiaca}} bpm</td>
+            <td>{{paciente.signosVitales[0]?.temperatura}}°C</td>
+            <td>{{paciente.signosVitales[0]?.saturacionOxigeno}}%</td>
+            <td>
+              <span class="trend-indicator" [class.up]="true" [class.down]="false">
+                <i class="fas" [class.fa-arrow-up]="true" [class.fa-arrow-down]="false"></i>
+                0.5%
+              </span>
+            </td>
+            <td>
+              <div class="actions">
+                <button class="btn-action" (click)="verDetalles(paciente.id)">Ver</button>
+                <button class="btn-action" (click)="editarPaciente(paciente.id)">Editar</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Componente del diálogo de nuevo paciente -->
+  <app-nuevo-paciente-dialog
+    [open]="mostrarDialogo"
+    (onClose)="cerrarDialogoNuevoPaciente()"
+    (onSubmit)="agregarPaciente($event)">
+  </app-nuevo-paciente-dialog>
+</div>

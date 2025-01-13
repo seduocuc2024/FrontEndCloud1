@@ -1,0 +1,115 @@
+<div class="modal" [class.show]="open">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Nuevo Paciente</h2>
+        <button class="close-button" (click)="onClose.emit()">×</button>
+      </div>
+  
+      <form (ngSubmit)="guardarPaciente()">
+        <div class="form-group">
+          <label for="nombre">Nombre *</label>
+          <input type="text" id="nombre" [(ngModel)]="paciente.nombre" name="nombre" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="apellido">Apellido *</label>
+          <input type="text" id="apellido" [(ngModel)]="paciente.apellido" name="apellido" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="rut">RUT *</label>
+          <input type="text" id="rut" [(ngModel)]="paciente.rut" name="rut" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="fechaNacimiento">Fecha de Nacimiento *</label>
+          <input type="date" id="fechaNacimiento" [(ngModel)]="paciente.fechaNacimiento" name="fechaNacimiento" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="grupoSanguineo">Grupo Sanguíneo *</label>
+          <select id="grupoSanguineo" [(ngModel)]="paciente.grupoSanguineo" name="grupoSanguineo" required>
+            <option value="O_POSITIVO">O+</option>
+            <option value="O_NEGATIVO">O-</option>
+            <option value="A_POSITIVO">A+</option>
+            <option value="A_NEGATIVO">A-</option>
+            <option value="B_POSITIVO">B+</option>
+            <option value="B_NEGATIVO">B-</option>
+            <option value="AB_POSITIVO">AB+</option>
+            <option value="AB_NEGATIVO">AB-</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="estado">Estado del Paciente *</label>
+          <select id="estado" [(ngModel)]="paciente.estado" name="estado" required>
+            <option value="ESTABLE">ESTABLE</option>
+            <option value="CRITICO">CRÍTICO</option>
+            <option value="GRAVE">GRAVE</option>
+            <option value="HOSPITALIZADO">HOSPITALIZADO</option>
+          </select>
+        </div>
+  
+        <div class="form-group">
+          <label for="direccion">Dirección</label>
+          <input type="text" id="direccion" [(ngModel)]="paciente.direccion" name="direccion">
+        </div>
+  
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" [(ngModel)]="paciente.email" name="email">
+        </div>
+  
+        <div class="form-group">
+          <label for="telefono">Teléfono</label>
+          <input type="tel" id="telefono" [(ngModel)]="paciente.telefono" name="telefono">
+        </div>
+  
+        <div class="form-group">
+          <label for="edad">Edad *</label>
+          <input type="number" id="edad" [(ngModel)]="paciente.edad" name="edad" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="numeroHabitacion">Número de Habitación *</label>
+          <input type="text" id="numeroHabitacion" [(ngModel)]="paciente.numeroHabitacion" name="numeroHabitacion" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="alergias">Alergias</label>
+          <textarea id="alergias" [(ngModel)]="paciente.alergias" name="alergias"></textarea>
+        </div>
+  
+        <div class="form-group">
+          <label for="antecedentes">Antecedentes Médicos</label>
+          <textarea id="antecedentes" [(ngModel)]="paciente.antecedentes" name="antecedentes"></textarea>
+        </div>
+  
+        <div class="form-group">
+          <label for="signosVitales">Signos Vitales Iniciales</label>
+          <div class="signos-vitales-grid">
+            <div>
+              <label for="presion">Presión Arterial (mmHg)</label>
+              <input type="text" id="presion" [(ngModel)]="paciente.signosVitales[0].presionArterial" name="presionArterial">
+            </div>
+            <div>
+              <label for="frecuencia">Frecuencia Cardíaca (bpm)</label>
+              <input type="number" id="frecuencia" [(ngModel)]="paciente.signosVitales[0].frecuenciaCardiaca" name="frecuenciaCardiaca">
+            </div>
+            <div>
+              <label for="temperatura">Temperatura (°C)</label>
+              <input type="number" id="temperatura" [(ngModel)]="paciente.signosVitales[0].temperatura" name="temperatura" step="0.1">
+            </div>
+            <div>
+              <label for="saturacion">Saturación de Oxígeno (%)</label>
+              <input type="number" id="saturacion" [(ngModel)]="paciente.signosVitales[0].saturacionOxigeno" name="saturacionOxigeno">
+            </div>
+          </div>
+        </div>
+  
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" (click)="onClose.emit()">Cancelar</button>
+          <button type="submit" class="btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>

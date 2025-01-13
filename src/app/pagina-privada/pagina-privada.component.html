@@ -1,0 +1,71 @@
+<!-- pagina-privada.component.html -->
+<div class="dashboard-container">
+  <header class="header">
+    <div class="logo-section">
+      <h1><i class="fas fa-heartbeat"></i> Sistema de Alertas Médicas</h1>
+    </div>
+    <div class="user-section">
+      <span class="user-name"><i class="fas fa-user-md"></i> Sr(a): {{obtenerUsuario()}}</span>
+      <button class="logout-button" (click)="cerrarSesion()">
+        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+      </button>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <div class="welcome-section">
+      <h2>Bienvenido al Panel de Control</h2>
+      <p>Sistema de monitoreo de pacientes en tiempo real</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card critical">
+        <div class="stat-icon">
+          <i class="fas fa-procedures"></i>
+        </div>
+        <div class="stat-content">
+          <h3>Pacientes Críticos</h3>
+          <div class="stat-number">{{pacientesCriticos}}</div>
+          <p>En monitoreo activo</p>
+        </div>
+      </div>
+
+      <div class="stat-card alerts">
+        <div class="stat-icon">
+          <i class="fas fa-hospital-user"></i>
+        </div>
+        <div class="stat-content">
+          <h3>Hospitalizados</h3>
+          <div class="stat-number">{{pacientesHospitalizados}}</div>
+          <p>Requieren atención</p>
+        </div>
+      </div>
+
+      <div class="stat-card system">
+        <div class="stat-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="stat-content">
+          <h3>Estado del Sistema</h3>
+          <div class="stat-status">Operativo</div>
+          <p>Todos los sensores activos</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="quick-actions">
+      <button class="action-button patients" (click)="navegarAPacientes()">
+        <i class="fas fa-user-injured"></i>
+        Ver pacientes
+      </button>
+      <button class="action-button alerts" (click)="navegarAAlertas()">
+        <i class="fas fa-bell"></i>
+        Ver Alertas
+      </button>
+      <button class="action-button reports">
+        <i class="fas fa-chart-line"></i>
+        Reportes
+      </button>
+    </div>
+  </div>
+</div>

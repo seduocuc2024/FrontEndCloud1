@@ -1,0 +1,78 @@
+<!-- alertas.component.html -->
+<div class="dashboard-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo-section">
+        <h1>Sistema de Alertas Médicas</h1>
+      </div>
+      <div class="user-section">
+        <span class="user-name">Sr(a):{{obtenerUsuario()}}</span>
+        <button class="logout-button" (click)="cerrarSesion()">
+          <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+        </button>
+      </div>
+    </header>
+  
+    <div class="main-content">
+      <div class="content-header">
+        <h2>Panel de Alertas</h2>
+        <div class="filter-section">
+          <select class="filter-select">
+            <option value="all">Todas las alertas</option>
+            <option value="critical">Críticas</option>
+            <option value="warning">Advertencias</option>
+          </select>
+        </div>
+      </div>
+  
+      <div class="alerts-grid">
+        <div class="alert-card" *ngFor="let paciente of pacientesConAlertas">
+          <div class="card-header">
+            <div class="patient-info">
+              <h3>{{paciente.nombre}}</h3>
+              <span class="room-badge">Hab. {{paciente.numeroHabitacion}}</span>
+            </div>
+            <div class="alert-dots">
+              <span class="alert-dot" *ngIf="tieneAlertaPresion(paciente)" 
+                    title="Presión Arterial Anormal"></span>
+              <span class="alert-dot" *ngIf="tieneAlertaFrecuencia(paciente)"
+                    title="Frecuencia Cardíaca Anormal"></span>
+              <span class="alert-dot" *ngIf="tieneAlertaTemperatura(paciente)"
+                    title="Temperatura Anormal"></span>
+              <span class="alert-dot" *ngIf="tieneAlertaSaturacion(paciente)"
+                    title="Saturación O₂ Baja"></span>
+            </div>
+          </div>
+  
+          <div class="vital-signs">
+            <div class="vital-sign" [class.abnormal]="tieneAlertaPresion(paciente)">
+              <i class="fas fa-heartbeat"></i>
+              <span class="vital-value">{{paciente.signosVitales[0].presionArterial}}</span>
+              <span class="vital-unit">mmHg</span>
+            </div>
+            <div class="vital-sign" [class.abnormal]="tieneAlertaFrecuencia(paciente)">
+              <i class="fas fa-clock"></i>
+              <span class="vital-value">{{paciente.signosVitales[0].frecuenciaCardiaca}}</span>
+              <span class="vital-unit">bpm</span>
+            </div>
+            <div class="vital-sign" [class.abnormal]="tieneAlertaTemperatura(paciente)">
+              <i class="fas fa-thermometer-half"></i>
+              <span class="vital-value">{{paciente.signosVitales[0].temperatura}}</span>
+              <span class="vital-unit">°C</span>
+            </div>
+            <div class="vital-sign" [class.abnormal]="tieneAlertaSaturacion(paciente)">
+              <i class="fas fa-lungs"></i>
+              <span class="vital-value">{{paciente.signosVitales[0].saturacionOxigeno}}</span>
+              <span class="vital-unit">%</span>
+            </div>
+          </div>
+  
+          <div class="card-actions">
+            <button class="action-button" (click)="verDetallesPaciente(paciente.id)">
+                <i class="fas fa-eye"></i> Ver Detalles
+              </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
